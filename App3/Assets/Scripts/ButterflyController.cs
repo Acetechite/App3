@@ -6,6 +6,7 @@ public class ButterflyController : MonoBehaviour {
 
     public float thrust;
     public Rigidbody rb;
+    public GameObject weapon;
 
 	// Use this for initialization
 	void Start () {
@@ -21,5 +22,15 @@ public class ButterflyController : MonoBehaviour {
         rb.velocity = transform.forward*-z;
         rb.AddRelativeTorque(0,x,0);
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Gun")
+        {
+            Destroy(other.gameObject);
+            var pistol = Instantiate(weapon,gameObject.transform);
+            pistol.transform.position = gameObject.transform.localPosition;
+        }
     }
 }
