@@ -7,11 +7,18 @@ public class ButterflyController : MonoBehaviour {
     public float thrust;
     public Rigidbody rb;
     public GameObject weapon;
+    public bool hasRed;
+    public bool hasBlue;
+    public bool hasGrey;
 
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
-	}
+        weapon.SetActive(false);
+        hasRed = false;
+        hasBlue = false;
+        hasGrey = false;
+}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -29,8 +36,33 @@ public class ButterflyController : MonoBehaviour {
         if (other.gameObject.tag == "Gun")
         {
             Destroy(other.gameObject);
-            var pistol = Instantiate(weapon,gameObject.transform);
-            pistol.transform.position = gameObject.transform.localPosition;
+            weapon.SetActive(true);
+            hasGrey = true;
+        }
+        else if(other.gameObject.tag == "RedShroom"){
+            Destroy(other.gameObject);
+            hasRed = true;
+        }
+        else if (other.gameObject.tag == "BlueShroom")
+        {
+            Destroy(other.gameObject);
+            hasBlue = true;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "RedWall" && hasRed)
+        {
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "BlueWall" && hasBlue)
+        {
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "GreyWall" && hasGrey)
+        {
+            Destroy(collision.gameObject);
         }
     }
 }

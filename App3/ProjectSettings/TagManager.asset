@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Gun
+  - RedShroom
+  - BlueShroom
+  - RedWall
+  - BlueWall
+  - GreyWall
   layers:
   - Default
   - TransparentFX
