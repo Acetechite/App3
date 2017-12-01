@@ -10,6 +10,7 @@ TagManager:
   - RedWall
   - BlueWall
   - GreyWall
+  - End
   layers:
   - Default
   - TransparentFX
